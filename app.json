@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f04a6d3b-ad87-4aaf-8976-541b7bfe0671"
+      }
+    },
+    "owner": "liunoah"
   }
 }
