@@ -15,24 +15,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.liunoah.noahblog"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.liunoah.noahblog"
-fffff"
-      }
-"favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "f04a6d3b-ad87-4aaf-8976-541b7bfe0671"
       }
     },
-    "owner": "liunoah"
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }
