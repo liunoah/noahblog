@@ -1,13 +1,24 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, ImageBackground, Platform } from 'react-native';
 import Header from './components/head/head';
-import Body from './components/body/body';
-
+import Body from "./components/body/body"
+import MD from './components/tools/markdown/Markdown';
+import Test from './components/body/test'
 export default function App() {
+  const randomImage = `https://picsum.photos/seed/${Math.floor(
+    Math.random() * 1000
+  )}/1200/1920`;
+
   return (
-    <View style={{ flex: 1 }}>
-      <Header />
-      <Body />
-    </View>
+    <ImageBackground
+      source={{ uri: randomImage }}
+      style={{ flex: 1 }}
+    >
+      <View style={{ width: 1000, alignSelf: 'center' }}>
+        {/* <Test />
+        <Header />
+        <Body /> */}
+      </View>
+    </ImageBackground>
   );
 }
