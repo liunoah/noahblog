@@ -1,17 +1,44 @@
-import React from 'react';
+import React,{useEffect,useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ScrollDetector from '../body/Rolling';
+import api from '../tools/api';
 
-export default function Header() {
+export default function Header(props) {
+  const [searchText,setSearchText] = useState("")
+  const handleInputChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  
+  useEffect(() => {
+    if (searchText) {
+      async function fetchData() {
+        const response = await api.get("search/"+searchText)
+        props.setDataList(response.blogs)
+      }
+      fetchData();
+    } else {
+    }
+  }, [searchText]);
+  const handleAddData = () => {
+    const newData = [
+      { title: 'search', text: props.searchText },
+      { title: 'Another Title', text: 'Another Text' },
+    ]
+    props.setDataList(newData);
+  };
+
   return (
     <View style={styles.outerContainer}>
+      <ScrollDetector onAddData = {props.onAddData} searchText={searchText}  />
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.button}>
             <Ionicons name="create-outline" size={24} color="white" />
           </TouchableOpacity>
-          <TextInput style={styles.input} placeholder="Search" />
-          <TouchableOpacity style={styles.button}>
+          <TextInput value={searchText} onChange={handleInputChange} style={styles.input} placeholder="Search" />
+          <TouchableOpacity onPress={handleAddData} style={styles.button}>
             <Ionicons name="search-outline" size={24} color="white" />
           </TouchableOpacity>
         </View>

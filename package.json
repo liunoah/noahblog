@@ -11,11 +11,14 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^18.0.1",
+    "eas": "^0.1.0",
     "expo": "~48.0.11",
     "expo-status-bar": "~1.4.4",
     "fontawesome": "^5.6.3",
+    "lodash": "^4.17.21",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "18.2.0",
     "react-markdown": "^8.0.7",
     "react-native": "^0.71.7",
     "react-native-elements": "^3.4.3",
@@ -23,7 +26,10 @@
     "react-native-paper": "^5.7.0",
     "react-native-web": "~0.18.10",
     "react-native-webview": "^12.0.2",
-    "showdown": "^2.1.0"
+    "react-quill": "^2.0.0",
+    "showdown": "^2.1.0",
+    "styled-components": "^5.3.9",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
