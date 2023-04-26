@@ -1,0 +1,54 @@
+pre {
+  background-color: #000;
+  color: #fff;
+  padding: 1em;
+  overflow: auto;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.language-javascript {
+  color: #f8dc3d;
+}
+
+.language-css {
+  color: #6ca0dc;
+}
+
+.language-html {
+  color: #e34c26;
+}
+
+.code-block {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background-color: #555;
+}
+
+.hljs {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.hljs-code {
+  overflow-x: auto;
+}

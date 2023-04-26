@@ -1,4 +1,4 @@
-// api.js
+import axios from 'axios';
 
 const API_BASE_URL = 'https://liunoah.com:4000/blogs/';
 // const API_BASE_URL = 'http://127.0.0.1:5000/blogs/';
@@ -8,41 +8,31 @@ const headers = {
 };
 
 const get = async (url) => {
-  const response = await fetch(`${API_BASE_URL}${url}`, {
-    method: 'GET',
+  const response = await axios.get(`${API_BASE_URL}${url}`, {
     headers,
   });
-  const data = await response.json();
-  return data;
+  return response.data;
 };
 
 const post = async (url, body) => {
-  const response = await fetch(`${API_BASE_URL}${url}`, {
-    method: 'POST',
+  const response = await axios.post(`${API_BASE_URL}${url}`, body, {
     headers,
-    body: JSON.stringify(body),
   });
-  const data = await response.json();
-  return data;
+  return response.data;
 };
 
 const put = async (url, body) => {
-  const response = await fetch(`${API_BASE_URL}${url}`, {
-    method: 'PUT',
+  const response = await axios.put(`${API_BASE_URL}${url}`, body, {
     headers,
-    body: JSON.stringify(body),
   });
-  const data = await response.json();
-  return data;
+  return response.data;
 };
 
 const remove = async (url) => {
-  const response = await fetch(`${API_BASE_URL}${url}`, {
-    method: 'DELETE',
+  const response = await axios.delete(`${API_BASE_URL}${url}`, {
     headers,
   });
-  const data = await response.json();
-  return data;
+  return response.data;
 };
 
 export default {

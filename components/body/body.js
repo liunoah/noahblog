@@ -2,8 +2,8 @@ import React, { useState ,useEffect } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import ListDisplay from './ListDisplay';
 import Head from '../head/head'
-import api  from '../tools/api';
-export function Body() {
+import api  from '../tools/Api';
+export default function Body() {
   
   const [dataList, setDataList] = useState([{}]);
   const addDataToList = (newData) => {
@@ -12,6 +12,7 @@ export function Body() {
   };
   
   useEffect(() => {
+    
     async function fetchData() {
       const response = await api.get("")
       setDataList(response.blogs)
@@ -22,12 +23,12 @@ export function Body() {
   useEffect(() => {
     console.log(dataList);
   }, [dataList]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Head onAddData = {addDataToList} setDataList = {setDataList}  />
       <ListDisplay dataList={dataList} />
-    </SafeAreaView>
-    
+    </SafeAreaView>    
   );
 }
 

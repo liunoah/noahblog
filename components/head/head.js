@@ -2,7 +2,8 @@ import React,{useEffect,useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ScrollDetector from '../body/Rolling';
-import api from '../tools/api';
+import { Link } from 'react-router-dom';
+import api from '../tools/Api';
 
 export default function Header(props) {
   const [searchText,setSearchText] = useState("")
@@ -21,13 +22,7 @@ export default function Header(props) {
     } else {
     }
   }, [searchText]);
-  const handleAddData = () => {
-    const newData = [
-      { title: 'search', text: props.searchText },
-      { title: 'Another Title', text: 'Another Text' },
-    ]
-    props.setDataList(newData);
-  };
+
 
   return (
     <View style={styles.outerContainer}>
@@ -35,12 +30,10 @@ export default function Header(props) {
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.button}>
-            <Ionicons name="create-outline" size={24} color="white" />
+        <Link to="/newpost"><Ionicons name="create-outline" size={24} color="white" /></Link>
+            
           </TouchableOpacity>
           <TextInput value={searchText} onChange={handleInputChange} style={styles.input} placeholder="Search" />
-          <TouchableOpacity onPress={handleAddData} style={styles.button}>
-            <Ionicons name="search-outline" size={24} color="white" />
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -52,8 +45,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#2e5bff',
     borderRadius: 24,
     marginTop: 32,
-    width: '100%',
-    alignItems: 'center',
+    width: '80%',
+    margin:'auto',
+    alignItems: 'center', 
   },
   container: {
     backgroundColor: '#2e5bff',

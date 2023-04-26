@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import api from "../tools/api";
-import { search } from "fontawesome";
+import api from "../tools/Api";
 
 function ScrollDetector(props) {
   const [pageStatus, setPageStatus] = useState("homepage");
@@ -29,7 +28,7 @@ function ScrollDetector(props) {
 
     if (scrollPosition >= pageHeight - windowHeight) {
       console.log("You have reached the bottom of the page");
-      console.log(props.searchText,11111111111);
+      console.log(props.searchText);
       console.log(props.searchText === "");
       handleAddData(props.searchText === "");
     }

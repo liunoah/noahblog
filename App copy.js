@@ -2,8 +2,6 @@ import Body from "./components/body/Body"
 import Newpost from './components/newpost/Newpost';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './assets/copy-to-clipboard'
-import './assets/copy-to-clipboard.css'
 
 const App = () => {
   return (
