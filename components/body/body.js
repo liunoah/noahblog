@@ -15,7 +15,7 @@ export default function Body() {
     
     async function fetchData() {
       const response = await api.get("")
-      setDataList(response.blogs)
+      // setDataList(response.blogs)
     }
     fetchData();
   }, []);

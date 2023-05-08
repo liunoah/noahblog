@@ -4,36 +4,64 @@ import { Ionicons } from '@expo/vector-icons';
 import ScrollDetector from '../body/Rolling';
 import { Link } from 'react-router-dom';
 import api from '../tools/Api';
+import { alignCenter } from 'fontawesome';
+import { AntDesign } from '@expo/vector-icons';
+import RandomNickname from '../tools/RandomNickname';
+
 
 export default function Header(props) {
   const [searchText,setSearchText] = useState("")
+  const [nickname,setNickname] = useState("")
   const handleInputChange = (event) => {
     setSearchText(event.target.value);
   };
-
   
   useEffect(() => {
-    if (searchText) {
+    const savedDataString = localStorage.getItem('nickname');
+    const savedData = savedDataString ? savedDataString : RandomNickname();
+    setNickname(savedData)
+    localStorage.setItem('nickname', savedData);
+    if (!searchText)  {
       async function fetchData() {
-        const response = await api.get("search/"+searchText)
+        const response = await api.get("")
         props.setDataList(response.blogs)
       }
       fetchData();
-    } else {
     }
+    
+
   }, [searchText]);
-
-
+ const handleSubmit = () => {
+    if (searchText)
+      handleSearch()
+  };
+  function handleSearch(event) {
+    async function fetchData() {
+      const response = await api.get("search/" + searchText);
+      props.setDataList(response.blogs);
+    }
+    fetchData();
+  }
+  const handleNickname = ()=>{
+    localStorage.setItem('nickname', nickname);
+  }
+  useEffect(() => {
+    localStorage.setItem('nickname', nickname);
+  }, [nickname]);
   return (
     <View style={styles.outerContainer}>
       <ScrollDetector onAddData = {props.onAddData} searchText={searchText}  />
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.button}>
-        <Link to="/newpost"><Ionicons name="create-outline" size={24} color="white" /></Link>
+        <Link to="/newpost"><Ionicons name="create-outline" size={24} color="rgb(52, 55, 63)" /></Link>
             
           </TouchableOpacity>
-          <TextInput value={searchText} onChange={handleInputChange} style={styles.input} placeholder="Search" />
+          <TextInput value={searchText}  onChange={handleInputChange} style={styles.input} placeholder="Search" onSubmitEditing={handleSubmit} />
+
+          <AntDesign name="search1" size={24} color="black" onPress={handleSearch} />
+          <TextInput onChange={(event) => setNickname(event.target.value)} value={nickname}  style={styles.input_nickname} onSubmitEditing={handleNickname} />
+
         </View>
       </View>
     </View>
@@ -42,19 +70,21 @@ export default function Header(props) {
 
 const styles = StyleSheet.create({
   outerContainer: {
-    backgroundColor: '#2e5bff',
+    overflow: "hidden",
+    backgroundColor: 'rgb(255, 255, 255)',
     borderRadius: 24,
-    marginTop: 32,
+    marginTop: 0,
     width: '80%',
     margin:'auto',
     alignItems: 'center', 
   },
   container: {
-    backgroundColor: '#2e5bff',
+    backgroundColor: 'rgb(255, 255, 255)',
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 12,
     width: '80%',
+    float:alignCenter
   },
   header: {
     flexDirection: 'row',
@@ -70,10 +100,19 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'rgb(235, 236, 240)',
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginHorizontal: 8,
+    width: 200,
+  },
+  input_nickname: {
+    backgroundColor: 'rgb(235, 236, 240)',
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginHorizontal: 8,
+    width: 100,
   },
 });

@@ -1,0 +1,63 @@
+.commit_button{
+    font-size: 12px;
+}
+.no-bullet {
+    list-style-type: none;
+    
+  }
+.comment_input{
+    border-radius: 10px;
+    border-color:rgb(235, 236, 240);
+    /* margin-left: 60px; */
+    margin-right: 10px;
+    width: 50%;
+    height: 30px;
+    border: none;
+    outline: none;
+}
+.list_p{
+    margin: 4px 0px 0px;
+    min-width: 0px;
+    color: rgb(68, 68, 68);
+    overflow-wrap: break-word;
+    font-size: 15px;
+    line-height: 21px;
+    border-bottom: 1px;
+    border-color: beige;
+}
+
+.name_p {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(139, 139, 139);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.css-zkfaav {
+    /* margin-left: 40px; */
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 55px;
+    background-color: rgb(136, 179, 241);
+    color: aliceblue;
+    border-color: rgb(136, 179, 241);
+    height: 28px;
+    border-radius: 10px;
+    border: none;
+    
+}
+li{
+    border-bottom: rgb(202, 205, 209) solid 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: -25px;
+}
