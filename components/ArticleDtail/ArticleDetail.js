@@ -9,12 +9,12 @@ import Head from '../head/head'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import Loading from '../tools/loading';
 const ArticleDetail = (props) => {
   const { articleId } = useParams();
   // const articleId  = props.articleId;
 
+  const [isLoading, setIsLoading] = useState(false);
 
   const [item, setItem] = useState({})
   const [data, setData] = useState([])
@@ -25,6 +25,8 @@ const ArticleDetail = (props) => {
       const response = await Api.get(articleId)
       console.log(response);
       setItem(response)
+      setIsLoading(true)
+
 
     }
     fetchData()
@@ -35,24 +37,28 @@ const ArticleDetail = (props) => {
     console.log(item.text);
   }, [item]);
   return (
+
     <View style={styles.body}>
-            <Head   />
+      <Head />
+      {isLoading ?
+        <View style={styles.item}>
 
-    <View style={styles.item}>
-      
-      <Text style={styles.title}>{"loading" && item.title}  </Text>
-      <Text style={styles.date} className="comment_list_date">{TimeFormat(item.updated_at)}</Text>
+          <Text style={styles.title}>{"loading" && item.title}  </Text>
+          <Text style={styles.date} className="comment_list_date">{TimeFormat(item.updated_at)}</Text>
 
-      <Text>
-        <MD markdown={item.text} />
-      </Text>
-      {articleId && <Comment articleId={articleId} isVisible={false} />}
-    </View>
+          <Text>
+            <MD markdown={item.text} />
+          </Text>
+          {articleId && <Comment articleId={articleId} isVisible={false} />}
+        </View> :
+        <Loading />
+      }
+
     </View>
   )
 }
 const styles = StyleSheet.create({
-  body:{
+  body: {
     width: '900px',
     margin: 'auto',
     marginTop: "20px", /* 添加上方 margin */

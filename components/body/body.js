@@ -3,9 +3,11 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import ListDisplay from './ListDisplay';
 import Head from '../head/head'
 import api  from '../tools/Api';
+import Loading from '../tools/loading';
 export default function Body() {
   
   const [dataList, setDataList] = useState([{}]);
+  const [isLoading, setIsLoading] = useState(true);
   const addDataToList = (newData) => {
     setDataList((prevDataList) => [...prevDataList, ...newData]);
     console.log(dataList);
@@ -15,7 +17,8 @@ export default function Body() {
     
     async function fetchData() {
       const response = await api.get("")
-      // setDataList(response.blogs)
+      setDataList(response.blogs)
+      setIsLoading(false)
     }
     fetchData();
   }, []);
@@ -27,7 +30,11 @@ export default function Body() {
   return (
     <SafeAreaView style={styles.container}>
       <Head onAddData = {addDataToList} setDataList = {setDataList}  />
-      <ListDisplay dataList={dataList} />
+      {
+        isLoading ?
+        <Loading />  :
+        <ListDisplay dataList={dataList} />
+      }
     </SafeAreaView>    
   );
 }

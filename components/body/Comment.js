@@ -66,6 +66,7 @@ function List(props) {
       setCommentNum(response.sum)
     }
     fetchData();
+    document.cookie = 'myCookie=value; SameSite=None; Secure';
   }, []);
 
   //检测评论列表
