@@ -1,27 +1,23 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import 'react-toastify/dist/ReactToastify.css';
-// minified version is also included
-// import 'react-toastify/dist/ReactToastify.min.css';
+import Body from "./components/body/Body"
+import Newpost from './components/newpost/Newpost';
+import Admin from './components/admin/AdminLogin'
+import ArticleDetail from "./components/ArticleDtail/ArticleDetail";
 
-function App(){
-  const notify = () => toast.success('🦄 发布成功!', {
-    position: "top-center",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    // progress: undefined,
-    theme: "light",
-    });;
-
+const App = () => {
   return (
-    <div>
-      <button onClick={notify}>Notify !</button>
-      <ToastContainer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Body />} />
+        <Route path="/newpost" element={<Newpost />} />
+        <Route path="/admin/login" element={<Admin />} />
+        <Route path="/detail/:articleId" element={<ArticleDetail />} />
+        
+      </Routes>
+    </BrowserRouter>
   );
-}
-export default App
+};
+
+export default App;

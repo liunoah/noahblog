@@ -1,5 +1,5 @@
 import React,{useEffect,useState } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity,Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ScrollDetector from '../body/Rolling';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,9 @@ export default function Header(props) {
     setSearchText(event.target.value);
   };
   
+  function handleLogo() {
+    window.scrollTo(0, 0);
+  }
   useEffect(() => {
     const savedDataString = localStorage.getItem('nickname');
     const savedData = savedDataString ? savedDataString : RandomNickname();
@@ -25,6 +28,7 @@ export default function Header(props) {
       async function fetchData() {
         const response = await api.get("")
         props.setDataList(response.blogs)
+        localStorage.setItem('blogs', JSON.stringify(response.blogs));
       }
       fetchData();
     }
@@ -39,6 +43,7 @@ export default function Header(props) {
     async function fetchData() {
       const response = await api.get("search/" + searchText);
       props.setDataList(response.blogs);
+      
     }
     fetchData();
   }
@@ -53,6 +58,11 @@ export default function Header(props) {
       <ScrollDetector onAddData = {props.onAddData} searchText={searchText}  />
       <View style={styles.container}>
         <View style={styles.header}>
+        <Link to="/">
+        <TouchableOpacity>
+      <Image style={styles.img} source={require('../../assets/favicon.png')} />
+    </TouchableOpacity>
+                    </Link>
           <TouchableOpacity style={styles.button}>
         <Link to="/newpost"><Ionicons name="create-outline" size={24} color="rgb(52, 55, 63)" /></Link>
             
@@ -60,7 +70,8 @@ export default function Header(props) {
           <TextInput value={searchText}  onChange={handleInputChange} style={styles.input} placeholder="Search" onSubmitEditing={handleSubmit} />
 
           <AntDesign name="search1" size={24} color="black" onPress={handleSearch} />
-          <TextInput onChange={(event) => setNickname(event.target.value)} value={nickname}  style={styles.input_nickname} onSubmitEditing={handleNickname} />
+          <div style={styles.div_nickname} >昵称:</div>
+          <TextInput placeholder="nickname" onChange={(event) => setNickname(event.target.value)} value={nickname}  style={styles.input_nickname} onSubmitEditing={handleNickname} />
 
         </View>
       </View>
@@ -72,18 +83,22 @@ const styles = StyleSheet.create({
   outerContainer: {
     overflow: "hidden",
     backgroundColor: 'rgb(255, 255, 255)',
-    borderRadius: 24,
-    marginTop: 0,
-    width: '80%',
+    // borderRadius: 24,
+    marginBottom: "20px",
+    width: '900px',
     margin:'auto',
     alignItems: 'center', 
+    border: "rgb(240, 242, 247) solid 1px",
+    position: 'fixed', top: '0%', left: '50%', transform: 'translate(-50%, -0%)' ,
+    zIndex:99,
+    // top: 0,
   },
   container: {
     backgroundColor: 'rgb(255, 255, 255)',
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    width: '80%',
+    width: '98%',
     float:alignCenter
   },
   header: {
@@ -106,6 +121,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginHorizontal: 8,
     width: 200,
+    
+    
   },
   input_nickname: {
     backgroundColor: 'rgb(235, 236, 240)',
@@ -115,4 +132,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     width: 100,
   },
+  div_nickname: {
+    paddingLeft: "10px",
+    fontSize: "14px"
+  },
+  img :{
+    width: "60px",
+    position: 'relative' ,
+    height: '50px'
+  }
 });

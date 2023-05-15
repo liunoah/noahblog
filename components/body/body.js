@@ -38,5 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
     backgroundColor: "rgb(255, 255, 255)",
+    marginTop:"85px"
   },
+
 });

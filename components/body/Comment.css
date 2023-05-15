@@ -1,18 +1,19 @@
 .commit_button{
     font-size: 12px;
+    
 }
 .no-bullet {
     list-style-type: none;
     
   }
 .comment_input{
+    border: 1px solid gray;
     border-radius: 10px;
-    border-color:rgb(235, 236, 240);
+    border-color:rgb(235, 236, 240) !important;
     /* margin-left: 60px; */
-    margin-right: 10px;
-    width: 50%;
-    height: 30px;
-    border: none;
+    margin-left: 15px;
+    width: 500px;
+    padding: 10px;
     outline: none;
 }
 .list_p{
@@ -20,28 +21,31 @@
     min-width: 0px;
     color: rgb(68, 68, 68);
     overflow-wrap: break-word;
-    font-size: 15px;
+    font-size: 12px;
     line-height: 21px;
     border-bottom: 1px;
     border-color: beige;
+    padding-top: 10px;
+    white-space: pre-line
+
 }
 
 .name_p {
     box-sizing: border-box;
     margin: 0px;
     min-width: 0px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     text-decoration: none;
-    color: rgb(139, 139, 139);
+    /* color: rgb(91, 91, 91); */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #2b2b2b;
 }
-.css-zkfaav {
-    /* margin-left: 40px; */
+.comment_button {
     box-sizing: border-box;
-    margin: 0px;
+    margin-left: 20px;
     min-width: 0px;
     -webkit-box-align: center;
     align-items: center;
@@ -58,6 +62,36 @@ li{
     border-bottom: rgb(202, 205, 209) solid 1px;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 80%;
+    width: 810px;
     margin-left: -25px;
+
 }
+.comment_list_date{
+    text-align: right;
+}
+
+/* 隐藏滚动条的箭头 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+  }
+  
+  /* 滚动条的背景色 */
+  /* ::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  } */
+  
+  /* 滚动条的前景色 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #ababab;
+    border-radius: 3px;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .logImg > img{
+    position: relative;
+  }

@@ -8,7 +8,7 @@ const TimeFormat = (initialDate) => {
   const seconds = date.getSeconds();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
-  const day = date.getDay()
+  const day = date.getDate() 
   const formattedTime = `${year}年${month}月${day}日${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   return <Text style={styles.date}>{formattedTime}</Text>;

@@ -15,7 +15,7 @@ eas build --platform ios
  ```
 *  run web
  ```shell
-  npx serve web-build
+  npx serve web-build --single //--single 选项，将所有请求重定向到 index.html 文件
 ```
 ## Production mode 
 ```

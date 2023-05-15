@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { EditorContainer, TitleInput, Editor, PublishButtonsContainer, PublishButton, ButtonWrapper } from './NewPostStrys';
 import Api from '../tools/Api';
 import modules from './modules';
+import generatePoem from '../tools/Poem';
+import Head from '../head/head'
 
 const BlogEditor = () => {
   const [title, setTitle] = useState('');
@@ -37,15 +39,19 @@ const BlogEditor = () => {
   const handlePublish = async () => {
     // do something with the title and text data, such as publishing to a blog
     console.log(`Title: ${title}\nText: ${text}`);
+    
     const body = {
       title: title,
       text: text,
     };
+    if (title == "") {
+      body.title = generatePoem()
+    }
+    handleClear()
     const res = await Api.post("",body)
     console.log(res);
     // localStorage.setItem('blogEditorData', "");
     // localStorage.removeItem('blogEditorData')
-    handleClear()
     alert("publish success")
     history('/')
     
@@ -58,7 +64,7 @@ const BlogEditor = () => {
 
   };
   
-  //看门狗
+  //看门狗,没有写...
   return (
     <EditorContainer>
       <TitleInput
