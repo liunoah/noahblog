@@ -5,7 +5,6 @@ import Head from '../head/head'
 import api  from '../tools/Api';
 import Loading from '../tools/loading';
 export default function Body() {
-  
   const [dataList, setDataList] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
   const addDataToList = (newData) => {
@@ -34,6 +33,10 @@ export default function Body() {
         isLoading ?
         <Loading />  :
         <ListDisplay dataList={dataList} />
+        
+      }
+      {
+        isLoading ? <div> </div> : <Loading />
       }
     </SafeAreaView>    
   );

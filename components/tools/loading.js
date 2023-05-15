@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
+    height: '10',
+    position: "relative",
   },
   spinner: {
     width: '50px',

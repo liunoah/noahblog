@@ -25,12 +25,13 @@ export default function Header(props) {
     setNickname(savedData)
     localStorage.setItem('nickname', savedData);
     if (!searchText)  {
-      async function fetchData() {
-        const response = await api.get("")
-        props.setDataList(response.blogs)
-        localStorage.setItem('blogs', JSON.stringify(response.blogs));
-      }
-      fetchData();
+      // async function fetchData() {
+      //   const response = await api.get("")
+        
+      //   props.setDataList(response.blogs)
+      //   localStorage.setItem('blogs', JSON.stringify(response.blogs));
+      // }
+      // fetchData();
     }
     
 

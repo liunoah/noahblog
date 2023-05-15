@@ -1,13 +1,14 @@
 import React, { useState,useEffect  } from 'react';
 import { EvilIcons } from '@expo/vector-icons';
 import './Comment.css'
-import { toast } from 'react-toastify';
 import Api from '../tools/Api';
 import TimeFormat from '../tools/TimeFormat';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import Loading from '../tools/loading';
 
 function List(props) {
   const [showList, setShowList] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const [data, setData] = useState([]);
 
   const addDataToList = (newData) => {
@@ -24,6 +25,8 @@ function List(props) {
     console.log(comment, name);
     const res = await Api.get("comments/" + props.articleId)
     setData(res.blogs)
+    setIsLoading(false)
+
   }
   
 
@@ -66,7 +69,6 @@ function List(props) {
       setCommentNum(response.sum)
     }
     fetchData();
-    document.cookie = 'myCookie=value; SameSite=None; Secure';
   }, []);
 
   //检测评论列表
@@ -76,7 +78,11 @@ function List(props) {
       <EvilIcons className="commit_button" onClick={handleClick} name="comment" color="gray" >{showList ? "收起评论" : commentNum ? commentNum + '条评论' : "新增评论"}</EvilIcons>
 
       {showList && (
-        <div>
+        <div> {
+          isLoading ? 
+
+          <div style={styles.loading}><Loading />  </div> :
+          <div>
           
           <ul className="no-bullet">
             {data.map(item => (
@@ -92,7 +98,9 @@ function List(props) {
           <button className='comment_button' onClick={handleSubmit} >提交</button>
           </div>
         </div>
-
+          }
+       
+        </div>
       )}
     </div>
   );
@@ -114,6 +122,10 @@ const styles={
   comment_div:{
     display:"flex",
     alignItems: "flex-end"
+  },
+  loading:{
+    width: "100%",
+    height: "100px",
   }
 }
 export default List;
