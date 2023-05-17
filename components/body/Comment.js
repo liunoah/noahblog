@@ -4,13 +4,13 @@ import './Comment.css'
 import Api from '../tools/Api';
 import TimeFormat from '../tools/TimeFormat';
 import Loading from '../tools/loading';
+import Toast from '../tools/Toast';
+
 
 function List(props) {
   const [showList, setShowList] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(true)
-
-
   const [data, setData] = useState([]);
 
   const addDataToList = (newData) => {
@@ -30,8 +30,26 @@ function List(props) {
     setIsLoading(false)
 
   }
+  //删除评论ui
+  const removeItem = (id) => {
+   
+    const newData = data.filter(item => item.id !== id);
+    setData(newData);
+  };
+  //删除评论
+  const handlePublishComment = (id) =>{
+    async function fetchData() {
+      const response = await Api.delete("comments/"+id)
+      console.log(response);
+      removeItem(id)
+      alert("delete success")
 
-
+    }
+    if (confirm('确认删除？')) {
+      fetchData()
+    } else {
+    }
+  }
   //发布评论
   const handleSubmit = async () => {
 
@@ -51,8 +69,10 @@ function List(props) {
       updated_at: new Date(),
     }]
     addDataToList(newData)
+
     setCommentNum(commentNum + 1)
     // alert("comment success")
+    Toast("添加评论成功")
     setComment("")
 
   };
@@ -95,7 +115,7 @@ function List(props) {
                         :
                         <div style={styles.admin}>
                           <div className='name_p'>{item.name} 说:</div>
-                          <button style={styles.button_delete}>delete</button>
+                          <button onClick={()=>{handlePublishComment(item.id)}} style={styles.button_delete}>delete</button>
                         </div>
 
                     }

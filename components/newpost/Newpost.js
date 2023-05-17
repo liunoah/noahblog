@@ -21,19 +21,13 @@ const BlogEditor = () => {
     setText(savedData.text || '');
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const data = {
-        title,
-        text,
-      };
-      localStorage.setItem('blogEditorData', JSON.stringify(data));
-      console.log(localStorage.getItem('blogEditorData', JSON.stringify(data)));
-      console.log("存储成功");
-      console.log(data);
-    }, 1000);
-
-    return () => clearInterval(interval);
+  useEffect(() => {   
+    const data = {
+      title,
+      text,
+    };
+    localStorage.setItem('blogEditorData', JSON.stringify(data));
+    console.log("存储成功");
   }, [title, text]);
 
   const handlePublish = async () => {
@@ -50,8 +44,6 @@ const BlogEditor = () => {
     handleClear()
     const res = await Api.post("",body)
     console.log(res);
-    // localStorage.setItem('blogEditorData', "");
-    // localStorage.removeItem('blogEditorData')
     alert("publish success")
     history('/')
     

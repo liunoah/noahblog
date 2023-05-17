@@ -13,6 +13,7 @@ const Update = () => {
   const [text, setText] = useState('');
   const { articleId } = useParams();
 
+
   const history = useNavigate();
 
   useEffect(() => {
@@ -22,33 +23,27 @@ const Update = () => {
       setTitle(response.title)
       setText(response.text)
     }
-    fetchData()
-    // const savedDataString = localStorage.getItem('blogEditorData');
-    // const savedData = savedDataString ? JSON.parse(savedDataString) : {};
-    // console.log("saveData",localStorage.getItem('blogEditorData'));
-    // setTitle(savedData.title || '');
-    // setText(savedData.text || '');
+    function getLocalData(){
+      const savedDataString = localStorage.getItem('updateData' + articleId);
+      const savedData = savedDataString ? JSON.parse(savedDataString) : {};
+      setTitle(savedData.title || '');
+      setText(savedData.text || '');
+    }
+    console.log();
+    if (localStorage.getItem('updateData' + articleId)) {
+      getLocalData()
+    }else{
+      fetchData()
+    }
   }, []);
 
   useEffect(() => {
-    // const interval = setInterval(() => {
-    //   const data = {
-    //     title,
-    //     text,
-    //   };
-    //   localStorage.setItem('blogEditorData', JSON.stringify(data));
-    //   console.log(localStorage.getItem('blogEditorData', JSON.stringify(data)));
-    //   console.log("存储成功");
-    //   console.log(data);
-    // }, 1000);
-
-    // return () => clearInterval(interval);
     const data = {
       title,
       text,
     };
-    localStorage.setItem('blogEditorData', JSON.stringify(data));
-    console.log(localStorage.getItem('blogEditorData', JSON.stringify(data)));
+    localStorage.setItem('updateData' + articleId, JSON.stringify(data));
+    console.log(localStorage.getItem('updateData' + articleId, JSON.stringify(data)));
     console.log("存储成功");
     
   }, [title, text]);
@@ -64,11 +59,9 @@ const Update = () => {
     if (title == "") {
       body.title = generatePoem()
     }
-    handleClear()
+    // handleClear()
     const res = await Api.put("" + articleId, body)
     console.log(res);
-    // localStorage.setItem('blogEditorData', "");
-    // localStorage.removeItem('blogEditorData')
     alert("update success")
     history('/')
 
@@ -76,8 +69,8 @@ const Update = () => {
   const handleClear = async () => {
     setText("")
     setTitle("")
-    localStorage.setItem('blogEditorData', "");
-    localStorage.removeItem('blogEditorData')
+    localStorage.setItem('updateData' + articleId, "");
+    localStorage.removeItem('updateData' + articleId)
 
   };
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { FlatList, Text, View, StyleSheet } from 'react-native';
-import MD from '../tools/markdown/Markdown'
 import Comment from './Comment'
 import TimeFormat from '../tools/TimeFormat';
 import { Link } from 'react-router-dom';
 import Article from './Article';
 import Api from '../tools/Api';
+import Toast from '../tools/Toast';
 const ListDisplay = ({ dataList,removeElement }) => {
   const [isText, setIsText] = useState("展开文章")
   const [isAdmin, setIsAdmin] = useState(true)
@@ -15,10 +15,13 @@ const ListDisplay = ({ dataList,removeElement }) => {
       const response = await Api.delete(articleiD)
       console.log(response);
       removeElement(articleiD)
-      alert("delete success")
+      Toast("删除文章成功")
 
     }
-    fetchData()
+    if (confirm('确认删除？')) {
+      fetchData()
+    } else {
+    }
   }
   const renderItem = ({ item }) => (
     <View style={styles.item}>
@@ -45,9 +48,6 @@ const ListDisplay = ({ dataList,removeElement }) => {
 
           </div>
       }
-
-
-
       <Text style={styles.date} className="comment_list_date">{TimeFormat(item.created_at)}</Text>
       <Article text={item.text} />
       {item.id && <Comment articleId={item.id} isVisible={true} />}

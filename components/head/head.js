@@ -15,26 +15,11 @@ export default function Header(props) {
   const handleInputChange = (event) => {
     setSearchText(event.target.value);
   };
-  
-  function handleLogo() {
-    window.scrollTo(0, 0);
-  }
   useEffect(() => {
     const savedDataString = localStorage.getItem('nickname');
     const savedData = savedDataString ? savedDataString : RandomNickname();
     setNickname(savedData)
     localStorage.setItem('nickname', savedData);
-    if (!searchText)  {
-      // async function fetchData() {
-      //   const response = await api.get("")
-        
-      //   props.setDataList(response.blogs)
-      //   localStorage.setItem('blogs', JSON.stringify(response.blogs));
-      // }
-      // fetchData();
-    }
-    
-
   }, [searchText]);
  const handleSubmit = () => {
     if (searchText)
@@ -69,7 +54,6 @@ export default function Header(props) {
             
           </TouchableOpacity>
           <TextInput value={searchText}  onChange={handleInputChange} style={styles.input} placeholder="Search" onSubmitEditing={handleSubmit} />
-
           <AntDesign name="search1" size={24} color="black" onPress={handleSearch} />
           <div style={styles.div_nickname} >昵称:</div>
           <TextInput placeholder="nickname" onChange={(event) => setNickname(event.target.value)} value={nickname}  style={styles.input_nickname} onSubmitEditing={handleNickname} />

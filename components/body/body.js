@@ -1,73 +1,57 @@
-import React, { useState ,useEffect } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import ListDisplay from './ListDisplay';
 import Head from '../head/head'
-import api  from '../tools/Api';
+import api from '../tools/Api';
 import Loading from '../tools/loading';
 
-
+import Toast from '../tools/Toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Body() {
-  const [dataList, setDataList] = useState([{}]);
+  const [dataList, setDataList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingOnButtom, setIsLoadingOnButtom] = useState(true)
+  const [isLoadingOnButtom, setIsLoadingOnButtom] = useState(true);
 
-  // const removeElement = (index) => {
-  //   // 检查索引是否有效
-  //   if (index < 0 || index >= dataList.length) {
-  //     throw new Error('Invalid index');
-  //   }
-  
-  //   // 创建一个新数组
-  //   const newDataList = [...dataList];
-  
-  //   // 删除指定索引的元素
-  //   newDataList.splice(index, 1);
-  
-  //   // 更新状态
-  //   setDataList(newDataList);
-  // };
   const removeElement = (id) => {
     const newData = dataList.filter(item => item.id !== id);
     setDataList(newData);
   };
+
   const addDataToList = (newData) => {
     setDataList((prevDataList) => [...prevDataList, ...newData]);
-    if(newData){
-      console.log(111111111111111111);
-      setIsLoadingOnButtom(true)
+    if (newData.length > 0) {
+      console.log('Loading on bottom is shown.');
+      setIsLoadingOnButtom(false);
+    }else{
+      setIsLoadingOnButtom(true);
     }
-    console.log(newData);
-    console.log(dataList);
   };
-  
+
   useEffect(() => {
-    
     async function fetchData() {
-      const response = await api.get("")
-      setDataList(response.blogs)
-      setIsLoading(false)
-      setIsLoadingOnButtom(false)
+      const response = await api.get('');
+      setDataList(response.blogs);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
 
   useEffect(() => {
-    console.log(dataList);
+    console.log('DataList has been updated:', dataList);
   }, [dataList]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Head onAddData = {addDataToList} setDataList = {setDataList}  />
-      {
-        isLoading ?
-        <Loading />  :
+      <ToastContainer  />
+      <Head onAddData={addDataToList} setDataList={setDataList} />
+      {isLoading ? (
+        <Loading />
+      ) : (
         <ListDisplay dataList={dataList} removeElement={removeElement} />
-        
-      }
-      {
-        isLoadingOnButtom  ? <div> </div> : <Loading />
-      }
-    </SafeAreaView>    
+      )}
+      {isLoadingOnButtom ? <View style={styles.loading} /> : <Loading />}
+    </SafeAreaView>
   );
 }
 
@@ -76,8 +60,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: "rgb(255, 255, 255)",
-    marginTop:"85px"
+    backgroundColor: 'rgb(255, 255, 255)',
+    marginTop: '85px',
   },
-
+  loading: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
