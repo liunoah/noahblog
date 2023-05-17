@@ -1,23 +1,54 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { FlatList, Text, View, StyleSheet } from 'react-native';
 import MD from '../tools/markdown/Markdown'
 import Comment from './Comment'
 import TimeFormat from '../tools/TimeFormat';
 import { Link } from 'react-router-dom';
 import Article from './Article';
-const ListDisplay = ({ dataList }) => {
-  const [isText,setIsText] = useState("展开文章")
+import Api from '../tools/Api';
+const ListDisplay = ({ dataList,removeElement }) => {
+  const [isText, setIsText] = useState("展开文章")
+  const [isAdmin, setIsAdmin] = useState(true)
+  // 删除文章 
+  const handleDelete = (articleiD) =>{
+    async function fetchData() {
+      const response = await Api.delete(articleiD)
+      console.log(response);
+      removeElement(articleiD)
+      alert("delete success")
 
-  const handleText = () => {
-    // console.log(111111);
-    setIsText(isText == "关闭文章" ? "展开文章" : "关闭文章" )
+    }
+    fetchData()
   }
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Link style={styles.link} to={`/detail/${item.id}`}>
-        <Text   style={styles.title}>{item.title}  </Text>
-      </Link>
-      <Text style={styles.date} className="comment_list_date">{TimeFormat(item.updated_at)}</Text>
+      {/*  admin用户展示删除 修改 按钮 */}
+      {/* 普通用户,只展示标题 */}
+      {
+        !isAdmin ?
+          <Link style={styles.link} to={`/detail/${item.id}`}>
+            <Text style={styles.title}>{item.title}
+            </Text>
+          </Link> :
+          <div style={styles.admin} >
+            <Text style={styles.admin_left}>
+            <Link to={`/detail/${item.id}`}>
+              <Text style={styles.title}>{item.title}</Text>
+              </Link>
+            </Text>
+            <Text style={styles.button_div}>
+              <Link to={`/edit/${item.id}`}>
+                <button style={styles.button_edit}>edit</button>
+              </Link>
+              <button onClick={()=>{handleDelete(item.id)}} style={styles.button_delete}>delete</button>
+            </Text>
+
+          </div>
+      }
+
+
+
+      <Text style={styles.date} className="comment_list_date">{TimeFormat(item.created_at)}</Text>
       <Article text={item.text} />
       {item.id && <Comment articleId={item.id} isVisible={true} />}
     </View>
@@ -60,16 +91,45 @@ const styles = StyleSheet.create({
   isText: {
     color: "rgb(133, 143, 165)",
     fontSize: 12,
-    whiteSpace : 'nowrap',  
+    whiteSpace: 'nowrap',
 
     width: '100px'
   },
   link: {
     textDecorationLine: 'none'
   },
-  text:{
+  button_div: {
+    marginLeft: "auto"
+  },
+  text: {
     overflow: 'scroll'
+  },
+  button_edit: {
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    borderRadius: '4px',
+    padding: '5px',
+    border: 'none',
+    cursor: 'pointer',
+    marginRight: '8px',
+    width: '60px'
 
+  },
+  button_delete: {
+    backgroundColor: '#f44336',
+    color: 'white',
+    borderRadius: '4px',
+    padding: '5px',
+    border: 'none',
+    cursor: 'pointer',
+    width: '60px'
+  },
+  admin: {
+    "display": "flex",
+    "flexDirection": "row"
+  },
+  admin_left: {
+    marginRight: 'auto'
   }
 });
 

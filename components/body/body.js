@@ -4,11 +4,39 @@ import ListDisplay from './ListDisplay';
 import Head from '../head/head'
 import api  from '../tools/Api';
 import Loading from '../tools/loading';
+
+
 export default function Body() {
   const [dataList, setDataList] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingOnButtom, setIsLoadingOnButtom] = useState(true)
+
+  // const removeElement = (index) => {
+  //   // 检查索引是否有效
+  //   if (index < 0 || index >= dataList.length) {
+  //     throw new Error('Invalid index');
+  //   }
+  
+  //   // 创建一个新数组
+  //   const newDataList = [...dataList];
+  
+  //   // 删除指定索引的元素
+  //   newDataList.splice(index, 1);
+  
+  //   // 更新状态
+  //   setDataList(newDataList);
+  // };
+  const removeElement = (id) => {
+    const newData = dataList.filter(item => item.id !== id);
+    setDataList(newData);
+  };
   const addDataToList = (newData) => {
     setDataList((prevDataList) => [...prevDataList, ...newData]);
+    if(newData){
+      console.log(111111111111111111);
+      setIsLoadingOnButtom(true)
+    }
+    console.log(newData);
     console.log(dataList);
   };
   
@@ -18,6 +46,7 @@ export default function Body() {
       const response = await api.get("")
       setDataList(response.blogs)
       setIsLoading(false)
+      setIsLoadingOnButtom(false)
     }
     fetchData();
   }, []);
@@ -32,11 +61,11 @@ export default function Body() {
       {
         isLoading ?
         <Loading />  :
-        <ListDisplay dataList={dataList} />
+        <ListDisplay dataList={dataList} removeElement={removeElement} />
         
       }
       {
-        isLoading ? <div> </div> : <Loading />
+        isLoadingOnButtom  ? <div> </div> : <Loading />
       }
     </SafeAreaView>    
   );
