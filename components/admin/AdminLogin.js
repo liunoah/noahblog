@@ -1,19 +1,43 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import Api from '../tools/Api';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import Toast from '../tools/Toast';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const history = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Username:', username);
     console.log('Password:', password);
-    // 执行登录逻辑
+  
+    try {
+      const body = {
+        password: password,
+        username: username,
+      };
+      const response = await Api.login(body);
+      console.log(response);
+      localStorage.setItem("isAdmin", true)
+      Toast.success('Login success');
+      history('/');
+    } catch (error) {
+      localStorage.setItem("isAdmin", false)
+      console.error(error);
+      Toast.error('Username or password error');
+    }
   };
 
   return (
     <View style={styles.father}>
+      <ToastContainer  />
+
       <View style={styles.loginWrapper}>
         <Text style={styles.loginTitle}>Welcome liunoah</Text>
         <View style={styles.loginInputWrapper}>

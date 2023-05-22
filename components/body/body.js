@@ -7,7 +7,7 @@ import Loading from '../tools/loading';
 
 import Toast from '../tools/Toast';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 export default function Body() {
   const [dataList, setDataList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

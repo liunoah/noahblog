@@ -10,7 +10,7 @@ import Toast from '../tools/Toast';
 function List(props) {
   const [showList, setShowList] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"))
   const [data, setData] = useState([]);
 
   const addDataToList = (newData) => {
@@ -72,7 +72,7 @@ function List(props) {
 
     setCommentNum(commentNum + 1)
     // alert("comment success")
-    Toast("添加评论成功")
+    Toast.success("添加评论成功")
     setComment("")
 
   };

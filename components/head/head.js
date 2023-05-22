@@ -7,8 +7,6 @@ import api from '../tools/Api';
 import { alignCenter } from 'fontawesome';
 import { AntDesign } from '@expo/vector-icons';
 import RandomNickname from '../tools/RandomNickname';
-
-
 export default function Header(props) {
   const [searchText,setSearchText] = useState("")
   const [nickname,setNickname] = useState("")
@@ -39,6 +37,7 @@ export default function Header(props) {
   useEffect(() => {
     localStorage.setItem('nickname', nickname);
   }, [nickname]);
+  
   return (
     <View style={styles.outerContainer}>
       <ScrollDetector onAddData = {props.onAddData} searchText={searchText}  />
@@ -57,7 +56,10 @@ export default function Header(props) {
           <AntDesign name="search1" size={24} color="black" onPress={handleSearch} />
           <div style={styles.div_nickname} >昵称:</div>
           <TextInput placeholder="nickname" onChange={(event) => setNickname(event.target.value)} value={nickname}  style={styles.input_nickname} onSubmitEditing={handleNickname} />
+          <Link to="/admin/login">
+          <AntDesign name="login" size={24} color="black" />
 
+          </Link>
         </View>
       </View>
     </View>

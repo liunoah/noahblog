@@ -8,14 +8,14 @@ import Api from '../tools/Api';
 import Toast from '../tools/Toast';
 const ListDisplay = ({ dataList,removeElement }) => {
   const [isText, setIsText] = useState("展开文章")
-  const [isAdmin, setIsAdmin] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"))
   // 删除文章 
   const handleDelete = (articleiD) =>{
     async function fetchData() {
       const response = await Api.delete(articleiD)
       console.log(response);
       removeElement(articleiD)
-      Toast("删除文章成功")
+      Toast.success("删除文章成功")
 
     }
     if (confirm('确认删除？')) {

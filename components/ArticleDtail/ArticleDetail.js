@@ -7,8 +7,6 @@ import Comment from '../body/Comment'
 import TimeFormat from '../tools/TimeFormat';
 import Head from '../head/head'
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../tools/loading';
 const ArticleDetail = (props) => {
   const { articleId } = useParams();

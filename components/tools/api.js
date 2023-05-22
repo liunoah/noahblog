@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = 'https://liunoah.com:4000/blogs/';
+
 // const API_BASE_URL = 'http://127.0.0.1:5000/blogs/';
 
 const headers = {
@@ -35,9 +36,26 @@ const remove = async (url) => {
   return response.data;
 };
 
+const setToken = (token) => {
+  headers['Authorization'] = token;
+};
+
+const login = async (body) => {
+  const response = await axios.post(`${API_BASE_URL}user/login`,body, {
+    headers,
+  });
+  if (response.status === 200) {
+    setToken(response.data.token)
+    
+    return true
+  }else {return false}
+};
+
 export default {
   get,
   post,
   put,
   delete: remove,
+  setToken,
+  login
 };
