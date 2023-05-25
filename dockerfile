@@ -1,5 +1,4 @@
-# 使用官方的 alpine 镜像作为基础镜像
 FROM alpine:latest
 
-# 输出 Hello World
-CMD echo "Hello World!"
+# 在容器启动时持续 ping baidu.com 并输出结果
+CMD ["sh", "-c", "while true; do ping -c 1 baidu.com; sleep 1; done"]
