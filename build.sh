@@ -1,2 +1,2 @@
-//更新代码
+# update code
 git pull
