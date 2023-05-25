@@ -14,9 +14,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Body />} />
         <Route path="/newpost" element={<Newpost />} />
+          
         <Route path="/edit/:articleId" element={<Update />} />
 
-        <Route path="/admin/login" element={<AdminLogin />} />
+//         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/detail/:articleId" element={<ArticleDetail />} />
         
