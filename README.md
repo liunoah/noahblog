@@ -20,4 +20,3 @@ eas build --platform ios
 ## Production mode 
 ```
 npx expo start --no-dev --minify
-test
