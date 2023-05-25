@@ -3,7 +3,10 @@
 android and ios scan th QR
 web addr
 `127.0.0.1:19006`
-# show
+## how to run
+```shell
+npx expo start --web
+```
 ## build ios
 ```shell
 eas build --platform ios

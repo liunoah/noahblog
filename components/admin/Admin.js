@@ -1,63 +1,29 @@
-import React, { useState ,useEffect } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import ListDisplay from '../body/ListDisplay';
-import Head from '../head/head'
-import api  from '../tools/Api';
-import Loading from '../tools/loading';
+import * as React from "react";
+import { Admin, Resource } from "react-admin";
+import jsonServerProvider from "ra-data-json-server";
 
+import { PostList, PostEdit, PostCreate } from "./posts";
+import { CommentList, CommentEdit, CommentCreate } from "./comments";
 
-export default function Body() {
-  const [dataList, setDataList] = useState([{}]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingOnButtom, setIsLoadingOnButtom] = useState(true)
-  const addDataToList = (newData) => {
-    setDataList((prevDataList) => [...prevDataList, ...newData]);
-    if(newData){
-      console.log(111111111111111111);
-      setIsLoadingOnButtom(true)
-    }
-    console.log(newData);
-    console.log(dataList);
-  };
-  
-  useEffect(() => {
-    
-    async function fetchData() {
-      const response = await api.get("")
-      setDataList(response.blogs)
-      setIsLoading(false)
-      setIsLoadingOnButtom(false)
-    }
-    fetchData();
-  }, []);
+const API_URL = "https://liunoah.com:4000"; // 根据你的 API 端口进行调整
 
-  useEffect(() => {
-    console.log(dataList);
-  }, [dataList]);
+const dataProvider = jsonServerProvider(API_URL);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Head onAddData = {addDataToList} setDataList = {setDataList}  />
-      {
-        isLoading ?
-        <Loading />  :
-        <ListDisplay dataList={dataList} />
-        
-      }
-      {
-        isLoadingOnButtom  ? <div> </div> : <Loading />
-      }
-    </SafeAreaView>    
-  );
-}
+const AdminPage = () => (
+  <Admin dataProvider={dataProvider}>
+    <Resource
+      name="blog"
+      list={PostList}
+      edit={PostEdit}
+      create={PostCreate}
+    />
+    <Resource
+      name="comments"
+      list={CommentList}
+      edit={CommentEdit}
+      create={CommentCreate}
+    />
+  </Admin>
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: "rgb(255, 255, 255)",
-    marginTop:"85px"
-  },
-
-});
+export default AdminPage;

@@ -33,6 +33,42 @@ const Login = () => {
       Toast.error('Username or password error');
     }
   };
+  //create new user
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    console.log('Username:', username);
+
+    //判断password 和 username长度大于6,小于20
+    if (password.length < 6 || password.length > 20) {
+      Toast.error('Password length error');
+      return;
+    }
+
+    //password is not same as username
+    if (password === username) {
+      Toast.error('Password is not same as username');
+      return;
+    }
+
+    
+
+    try {
+      const body = {
+        password: password,
+        username: username,
+      };
+      const response = await Api.register(body);
+      console.log(response);
+      Toast.success('Register success');
+      history('/');
+    } catch (error) {
+      console.error(error);
+      Toast.error('Username or password error');
+    }
+  };
+
+
+
 
   return (
     <View style={styles.father}>
@@ -74,7 +110,7 @@ const Login = () => {
 };
 
 const styles = StyleSheet.create({
-  father: {
+  father: { 
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -143,6 +179,18 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     color: '#007bff',
   },
+  // create a new style for the button
+  button: {
+    backgroundColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+  },
+  // create a new style for the list item text
+  itemText: {
+    fontSize: 20,
+    color: '#333',
+  }, 
+
 });
 
 export default Login;
