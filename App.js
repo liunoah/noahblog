@@ -18,7 +18,7 @@ const App = () => {
         <Route path="/edit/:articleId" element={<Update />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<Admin />} />
+        {/* <Route path="/admin" element={<Admin />} /> */}
         <Route path="/detail/:articleId" element={<ArticleDetail />} />
         
       </Routes>
