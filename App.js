@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Body from '/components/body/Body'
+import MainBody from '/components/body/MainBody'
 import Newpost from '/components/newpost/Newpost';
 import AdminLogin from '/components/admin/AdminLogin'
 import ArticleDetail from "/components/ArticleDtail/ArticleDetail";
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Body />} />
+        <Route path="/" element={<MainBody />} />
         <Route path="/newpost" element={<Newpost />} />
           
         <Route path="/edit/:articleId" element={<Update />} />

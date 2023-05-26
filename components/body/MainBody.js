@@ -8,7 +8,7 @@ import Loading from '../tools/loading';
 import Toast from '../tools/Toast';
 import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
-export default function Body() {
+ function MainBody() {
   const [dataList, setDataList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingOnButtom, setIsLoadingOnButtom] = useState(true);
@@ -69,3 +69,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+export default MainBody
