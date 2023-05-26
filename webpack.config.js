@@ -4,7 +4,7 @@ module.exports = {
   // ...
   resolve: {
     alias: {
-      '@tools': path.resolve(__dirname, 'components/tools')
+      '@tools': path.resolve(__dirname, '/components/tools')
     }
   }
 };
