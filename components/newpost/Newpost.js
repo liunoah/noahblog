@@ -8,7 +8,7 @@ import modules from './modules';
 import generatePoem from '../tools/Poem';
 import Head from '../head/head'
 
-const BlogEditor = () => {
+const Newpost = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const history = useNavigate();
@@ -78,4 +78,4 @@ const BlogEditor = () => {
   );
 };
 
-export default BlogEditor;
+export default Newpost;

@@ -3,7 +3,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { EditorContainer, TitleInput, Editor, PublishButtonsContainer, PublishButton, ButtonWrapper } from './NewPostStrys';
-import Api from '../tools/Api';
+import Api from '/components/tools/Api';
 import modules from './modules';
 import generatePoem from '../tools/Poem';
 import Head from '../head/head'

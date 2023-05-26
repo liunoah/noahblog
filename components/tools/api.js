@@ -145,5 +145,5 @@ export default {
   deleteCommentById,
   createComment,
   updateComment,
-  getSumOfCommentsByBlogId,
-};
+  getSumOfCommentsByBlogId
+}
