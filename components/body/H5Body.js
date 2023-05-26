@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import Api from '../tools/Api';
+import Api from '/components/tools/Api';
 
 
 function H5Body(props) {

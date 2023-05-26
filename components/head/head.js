@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, TouchableOpacity,Image } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import ScrollDetector from '../body/Rolling';
 import { Link } from 'react-router-dom';
-import api from '../tools/Api';
+import Api from '/components/tools/Api';
 import { alignCenter } from 'fontawesome';
 import { AntDesign } from '@expo/vector-icons';
 import RandomNickname from '../tools/RandomNickname';

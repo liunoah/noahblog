@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import Api from '../tools/Api';
+import Api from '/components/tools/Api';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 

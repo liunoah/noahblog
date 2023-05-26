@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EvilIcons } from '@expo/vector-icons';
 import './Comment.css'
-import Api from '../tools/Api';
+import Api from '/components/tools/Api';
 import TimeFormat from '../tools/TimeFormat';
 import Loading from '../tools/loading';
 import Toast from '../tools/Toast';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import api from "../tools/Api";
+import Api from '/components/tools/Api';
 
 function ScrollDetector(props) {
   const [pageStatus, setPageStatus] = useState("homepage");

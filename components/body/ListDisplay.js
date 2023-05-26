@@ -4,7 +4,7 @@ import Comment from './Comment'
 import TimeFormat from '../tools/TimeFormat';
 import { Link } from 'react-router-dom';
 import Article from './Article';
-import Api from '../tools/Api';
+import Api from '/components/tools/Api';
 import Toast from '../tools/Toast';
 const ListDisplay = ({ dataList,removeElement }) => {
   const [isText, setIsText] = useState("展开文章")

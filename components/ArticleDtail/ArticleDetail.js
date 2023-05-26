@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Api from '../tools/Api';
+import Api from '/components/tools/Api';
 import { Text, View, StyleSheet } from 'react-native';
 import MD from '../tools/markdown/Markdown'
 import Comment from '../body/Comment'
