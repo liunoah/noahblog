@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Body from "./components/body/Body"
-import Newpost from './components/newpost/Newpost';
-import AdminLogin from './components/admin/AdminLogin'
-import ArticleDetail from "./components/ArticleDtail/ArticleDetail";
-import Admin from './components/admin/Admin';
-import Update from './components/newpost/Update';
+import Body from "/components/body/Body"
+import Newpost from '/components/newpost/Newpost';
+import AdminLogin from '/components/admin/AdminLogin'
+import ArticleDetail from "/components/ArticleDtail/ArticleDetail";
+import Admin from '/components/admin/Admin';
+import Update from '/components/newpost/Update';
 
 const App = () => {
   return (
