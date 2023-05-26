@@ -8,7 +8,7 @@ import ArticleDetail from "./components/ArticleDtail/ArticleDetail";
 import Admin from './components/admin/Admin';
 import Update from './components/newpost/Update';
 
-const Body = () => {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -26,4 +26,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default App;
