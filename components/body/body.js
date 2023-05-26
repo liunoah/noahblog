@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import ListDisplay from './ListDisplay';
 import Head from '../head/head'
-import api from '../tools/Api';
+import api from '/components/tools/Api';
 import Loading from '../tools/loading';
 
 import Toast from '../tools/Toast';
