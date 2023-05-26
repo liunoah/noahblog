@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Body from "/components/body/Body"
+import Body from '@components/body/Body'
 import Newpost from '/components/newpost/Newpost';
 import AdminLogin from '/components/admin/AdminLogin'
 import ArticleDetail from "/components/ArticleDtail/ArticleDetail";
