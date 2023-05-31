@@ -1,26 +1,25 @@
-# how to run this project
-`npx expo start`
-android and ios scan th QR
-web addr
-`127.0.0.1:19006`
+## Project Introduction
+simple blog 
+### index
+![image](https://github.com/liunoah/noahblog/assets/89234625/939d7360-9cff-4065-acc2-f48425468dc2)
+### publish new post
+![image](https://github.com/liunoah/noahblog/assets/89234625/734a7037-0f76-4f8d-99af-edc6311867b3)
+### user
+![image](https://github.com/liunoah/noahblog/assets/89234625/e3de8118-c96a-45da-8809-a3bf763156b5)
+
+
 ## how to run
 ```shell
-npx expo start --web
+npm start 
 ```
-## build ios
+
+## How to build
 ```shell
-eas build --platform ios
-```
-## build web
-* create web-build
-```shell
- npx expo export:web
+ npm build
  ```
-*  run web
+## How to run on the server
  ```shell
-  npx serve web-build --single //--single 选项，将所有请求重定向到 index.html 文件
+  npx serve web-build --single //--single procession router
 ```
-## Production mode 
-```
-npx expo start --no-dev --minify
+
 
