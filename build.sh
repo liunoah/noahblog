@@ -24,7 +24,7 @@ fi
 # 启动新的容器 外部端口3000
 docker run -d --name $CONTAINER_NAME -p 3000:3000 $IMAGE_NAME
 
-# 删除所有未被使用的镜像、容器和数据卷
+# 删除所有未被使用的镜像、容器和数据卷22
 docker image prune
 
 # 查看运行容器
