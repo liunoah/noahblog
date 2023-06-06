@@ -5,7 +5,7 @@ import Api from '/components/tools/Api';
 import TimeFormat from '../tools/TimeFormat';
 import Loading from '../tools/loading';
 import Toast from '../tools/Toast';
-
+import getBrowserInfo from '../tools/GetBrowserInfo';
 
 function List(props) {
   const [showList, setShowList] = useState(false);
@@ -141,7 +141,8 @@ const styles = {
     border: '1px solid rgb(235, 236, 240)',
     borderRadius: '10px',
     marginLeft: '15px',
-    width: '740px',
+    
+    width: getBrowserInfo() ? "29%" : "740px",
     height: '50px',
     maxWidth: '700px',
     lineHeight: "20px",

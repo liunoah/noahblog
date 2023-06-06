@@ -4,15 +4,15 @@ import ListDisplay from './ListDisplay';
 import Head from '../head/head'
 import api from '/components/tools/Api';
 import Loading from '../tools/loading';
-
-import Toast from '../tools/Toast';
 import { ToastContainer, toast } from 'react-toastify';
+
+
 // import 'react-toastify/dist/ReactToastify.css';
  function MainBody() {
   const [dataList, setDataList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingOnButtom, setIsLoadingOnButtom] = useState(true);
-
+  
   const removeElement = (id) => {
     const newData = dataList.filter(item => item.id !== id);
     setDataList(newData);
@@ -28,6 +28,7 @@ import { ToastContainer, toast } from 'react-toastify';
     }
   };
 
+    
   useEffect(() => {
     async function fetchData() {
       const response = await api.get('');

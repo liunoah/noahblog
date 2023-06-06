@@ -50,7 +50,7 @@ const Update = () => {
 
   const handlePublish = async () => {
     // do something with the title and text data, such as publishing to a blog
-    console.log(`Title: ${title}\nText: ${text}`);
+    // console.log(`Title: ${title}\nText: ${text}`);
 
     const body = {
       title: title,

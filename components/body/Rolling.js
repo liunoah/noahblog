@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import Api from '/components/tools/Api';
+import Api from '../tools/Api';
 
 function ScrollDetector(props) {
   const [pageStatus, setPageStatus] = useState("homepage");
@@ -11,11 +11,11 @@ function ScrollDetector(props) {
     let newData = [];
     if (test) {
       // 如果 searchText 没有改变，或者为空字符串，则使用默认的 api.get("?page=" + ++page) 请求数据
-      newData = await api.get("?page=" + ++page);
+      newData = await Api.get("?page=" + ++page);
       newData = newData.blogs;
     } else {
       // 否则，使用带有搜索文本的 api.get 请求数据
-      newData = await api.get("search/" + props.searchText + "?page=" + ++page);
+      newData = await Api.get("search/" + props.searchText + "?page=" + ++page);
       newData = newData.blogs;
     }
     props.onAddData(newData);

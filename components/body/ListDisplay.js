@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom';
 import Article from './Article';
 import Api from '/components/tools/Api';
 import Toast from '../tools/Toast';
+function getBrowserInfo() {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  console.log('isMobile', isMobile);
+  return isMobile;
+}
+const isMobile = getBrowserInfo();
 const ListDisplay = ({ dataList,removeElement }) => {
   const [isText, setIsText] = useState("展开文章")
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"))
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(255, 255, 255)",
     padding: 20,
     marginVertical: 8,
-    width: '900px',
+    width: isMobile ? "100%" : "900px",
     margin: 'auto',
     border: '1px solid rgb(240, 242, 247)',
     borderRadius: '5px',

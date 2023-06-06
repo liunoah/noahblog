@@ -6,7 +6,13 @@ import MD from '../tools/markdown/Markdown'
 import Comment from '../body/Comment'
 import TimeFormat from '../tools/TimeFormat';
 import Head from '../head/head'
-
+import HeadH5 from '../head/HeadH5';
+function getBrowserInfo() {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  console.log('isMobile', isMobile);
+  return isMobile;
+}
+const isMobile = getBrowserInfo();
 import Loading from '../tools/loading';
 const ArticleDetail = (props) => {
   const { articleId } = useParams();
@@ -37,7 +43,7 @@ const ArticleDetail = (props) => {
   return (
 
     <View style={styles.body}>
-      <Head />
+      {isMobile ? <HeadH5 /> : <Head />}
       {isLoading ?
         <View style={styles.item}>
 

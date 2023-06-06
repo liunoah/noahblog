@@ -1,5 +1,5 @@
-import React,{useEffect,useState } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity,Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ScrollDetector from '../body/Rolling';
 import { Link } from 'react-router-dom';
@@ -7,9 +7,9 @@ import Api from '/components/tools/Api';
 import { alignCenter } from 'fontawesome';
 import { AntDesign } from '@expo/vector-icons';
 import RandomNickname from '../tools/RandomNickname';
-export default function Header(props) {
-  const [searchText,setSearchText] = useState("")
-  const [nickname,setNickname] = useState("")
+export default function HeadH5(props) {
+  const [searchText, setSearchText] = useState("")
+  const [nickname, setNickname] = useState("")
   const handleInputChange = (event) => {
     setSearchText(event.target.value);
   };
@@ -19,7 +19,7 @@ export default function Header(props) {
     setNickname(savedData)
     localStorage.setItem('nickname', savedData);
   }, [searchText]);
- const handleSubmit = () => {
+  const handleSubmit = () => {
     if (searchText)
       handleSearch()
   };
@@ -27,37 +27,27 @@ export default function Header(props) {
     async function fetchData() {
       const response = await Api.get("search/" + searchText);
       props.setDataList(response.blogs);
-      
+
     }
     fetchData();
   }
-  const handleNickname = ()=>{
+  const handleNickname = () => {
     localStorage.setItem('nickname', nickname);
   }
   useEffect(() => {
     localStorage.setItem('nickname', nickname);
   }, [nickname]);
-  
+
   return (
     <View style={styles.outerContainer}>
-      <ScrollDetector onAddData = {props.onAddData} searchText={searchText}  />
+      <ScrollDetector onAddData={props.onAddData} searchText={searchText} />
       <View style={styles.container}>
         <View style={styles.header}>
-        <Link to="/">
-        <TouchableOpacity>
-      <Image style={styles.img} source={require('../../assets/favicon.png')} />
-    </TouchableOpacity>
-                    </Link>
-          <TouchableOpacity style={styles.button}>
-        <Link to="/newpost"><Ionicons name="create-outline" size={24} color="rgb(52, 55, 63)" /></Link>
-            
-          </TouchableOpacity>
-          <TextInput value={searchText}  onChange={handleInputChange} style={styles.input} placeholder="Search" onSubmitEditing={handleSubmit} />
+          <TextInput value={searchText} onChange={handleInputChange} style={styles.input} placeholder="Search" onSubmitEditing={handleSubmit} />
           <AntDesign name="search1" size={24} color="black" onPress={handleSearch} />
-          <div style={styles.div_nickname} >昵称:</div>
-          <TextInput placeholder="nickname" onChange={(event) => setNickname(event.target.value)} value={nickname}  style={styles.input_nickname} onSubmitEditing={handleNickname} />
+          <TextInput placeholder="nickname" onChange={(event) => setNickname(event.target.value)} value={nickname} style={styles.input_nickname} onSubmitEditing={handleNickname} />
           <Link to="/admin/login">
-          <AntDesign name="login" size={24} color="black" />
+            <AntDesign name="login" size={24} color="black" />
 
           </Link>
         </View>
@@ -72,12 +62,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(255, 255, 255)',
     // borderRadius: 24,
     marginBottom: "20px",
-    width: '900px',
-    margin:'auto',
-    alignItems: 'center', 
+    margin: 'auto',
+    alignItems: 'center',
     border: "rgb(240, 242, 247) solid 1px",
-    position: 'fixed', top: '0%', left: '50%', transform: 'translate(-50%, -0%)' ,
-    zIndex:99,
+    position: 'fixed', top: '0%', left: '50%', transform: 'translate(-50%, -0%)',
+    zIndex: 99,
+    width: '100%',
     // top: 0,
   },
   container: {
@@ -86,7 +76,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     width: '98%',
-    float:alignCenter
+    float: alignCenter
   },
   header: {
     flexDirection: 'row',
@@ -107,9 +97,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginHorizontal: 8,
-    width: 200,
-    
-    
+    width: "180px",
+    marginRight: "8px",
+    marginLeft: "0px",
+
+
   },
   input_nickname: {
     backgroundColor: 'rgb(235, 236, 240)',
@@ -123,9 +115,9 @@ const styles = StyleSheet.create({
     paddingLeft: "10px",
     fontSize: "14px"
   },
-  img :{
+  img: {
     width: "60px",
-    position: 'relative' ,
+    position: 'relative',
     height: '50px'
   }
 });
