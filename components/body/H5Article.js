@@ -7,17 +7,14 @@ import { Ionicons } from '@expo/vector-icons';
 import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 
 import Api from '../tools/Api';
-function Article({ item }) {
+function H5Article({ item }) {
     const [isText, setIsText] = useState(true)
 
     const handleText = () => {
         // console.log(111111);
         setIsText(isText ? false : true)
     }
-    useEffect(() => {
-        Api.addBlogFrequency(item.id)
-      }, []);
-    
+    Api.addBlogFrequency(item.id)
     return (
         <Text style={styles.item}>
             <div style={styles.information}>
@@ -49,11 +46,11 @@ const styles = StyleSheet.create({
         
     },
     time: {
-        width: "200px",
+        width: "180px",
         display: 'inline-block',
     },
     icon:{
-        marginLeft: 20,
+        marginLeft: 10,
         color: "rgb(22, 78, 150)",
     },
 
@@ -82,4 +79,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Article
+export default H5Article

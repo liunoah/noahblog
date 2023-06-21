@@ -6,26 +6,44 @@ import { Link } from 'react-router-dom';
 import Article from './Article';
 import Api from '/components/tools/Api';
 import Toast from '../tools/Toast';
-function getBrowserInfo() {
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  console.log('isMobile', isMobile);
-  return isMobile;
-}
+import getBrowserInfo from '../tools/GetBrowserInfo';
+import H5Article from './H5Article';
+// function getBrowserInfo() {
+//   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+//   console.log('isMobile', isMobile);
+//   return isMobile;
+// }
 const isMobile = getBrowserInfo();
-const ListDisplay = ({ dataList,removeElement }) => {
-  const [isText, setIsText] = useState("展开文章")
+const ListDisplay = ({ dataList, removeElement }) => {
+  const [isText, setIsText] = useState(true)
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"))
+
+  const handleText = () => {
+    // console.log(111111);
+    setIsText(isText  ? false : true)
+}
   // 删除文章 
-  const handleDelete = (articleiD) =>{
+  const handleDelete = (articleiD) => {
     async function fetchData() {
-      const response = await Api.delete(articleiD)
-      console.log(response);
-      removeElement(articleiD)
-      Toast.success("删除文章成功")
+      try {
+        const response = await Api.delete(articleiD)
+        console.log(response);
+        removeElement(articleiD)
+        Toast.success("删除文章成功")
+      } catch (error) {
+        console.log(error);
+        Toast.error("删除文章失败" + error.message)
+      }
+
 
     }
     if (confirm('确认删除？')) {
-      fetchData()
+      try {
+        fetchData()
+      } catch (error) {
+        console.log(error);
+        Toast.error("删除文章失败")
+      }
     } else {
     }
   }
@@ -41,21 +59,30 @@ const ListDisplay = ({ dataList,removeElement }) => {
           </Link> :
           <div style={styles.admin} >
             <Text style={styles.admin_left}>
-            <Link to={`/detail/${item.id}`}>
-              <Text style={styles.title}>{item.title}</Text>
+              <Link to={`/detail/${item.id}`}>
+                <Text style={styles.title}>{item.title}</Text>
               </Link>
             </Text>
             <Text style={styles.button_div}>
               <Link to={`/edit/${item.id}`}>
                 <button style={styles.button_edit}>edit</button>
               </Link>
-              <button onClick={()=>{handleDelete(item.id)}} style={styles.button_delete}>delete</button>
+              <button onClick={() => { handleDelete(item.id) }} style={styles.button_delete}>delete</button>
             </Text>
 
           </div>
       }
+      {/* <div style={styles.date_name}>
       <Text style={styles.date} className="comment_list_date">{TimeFormat(item.created_at)}</Text>
-      <Article text={item.text} />
+        <Text style={styles.date} className="comment_list_date">{item.name}</Text>
+
+      </div> */}
+      {
+        isMobile ?
+        <H5Article item={item} /> :
+        <Article item={item} />
+      }
+      {/* <Article item={item} /> */}
       {item.id && <Comment articleId={item.id} isVisible={true} />}
     </View>
   );
@@ -85,14 +112,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "rgb(74, 135, 242)",
     fontWeight: 'bolder',
-    width: "400px"
+    width: "400px!"
 
 
   },
   date: {
     color: "rgb(133, 143, 165)",
     fontSize: 12,
-    textAlign: "right"
+    textAlign: "right",
+    marginRight: 20,
   },
   isText: {
     color: "rgb(133, 143, 165)",
@@ -105,7 +133,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'none'
   },
   button_div: {
-    marginLeft: "auto"
+    marginLeft: "auto",
+    width:130
   },
   text: {
     overflow: 'scroll'
@@ -135,8 +164,12 @@ const styles = StyleSheet.create({
     "flexDirection": "row"
   },
   admin_left: {
+    width: '700px',
     marginRight: 'auto'
-  }
+  },
+  date_name:{
+    marginTop: '10px',
+  },
 });
 
 export default ListDisplay;

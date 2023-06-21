@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { bool } from 'prop-types';
 
 const API_BASE_URL = 'https://liunoah.com:4000/blogs/';
 
@@ -126,6 +127,20 @@ const getSumOfCommentsByBlogId = async (id) => {
   return response;
 };
 
+// get blogs by name
+const getBlogsByName = async (name) => {
+  const response = await get(`name/${name}`);
+  return response;
+};
+
+//增加访问次数
+const addBlogFrequency = async (id) => {
+  const body = {
+    id: id,
+  };
+  const response = await post(`frequency`,body);
+    return response;
+};
 export default {
   get,
   post,
@@ -145,5 +160,7 @@ export default {
   deleteCommentById,
   createComment,
   updateComment,
-  getSumOfCommentsByBlogId
+  getSumOfCommentsByBlogId,
+  getBlogsByName,
+  addBlogFrequency,
 }

@@ -23,7 +23,7 @@ const ArticleDetail = (props) => {
   const [item, setItem] = useState({})
   const [data, setData] = useState([])
 
-
+  Api.addBlogFrequency(articleId)
   useEffect(() => {
     async function fetchData() {
       const response = await Api.get(articleId)

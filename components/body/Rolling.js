@@ -1,24 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import Api from '../tools/Api';
+import { useLocation } from 'react-router-dom';
 
 function ScrollDetector(props) {
-  const [pageStatus, setPageStatus] = useState("homepage");
   const previousSearchTextRef = useRef("");
 
   let page = 1;
-
-  const handleAddData = async (test) => {
-    let newData = [];
-    if (test) {
-      // 如果 searchText 没有改变，或者为空字符串，则使用默认的 api.get("?page=" + ++page) 请求数据
-      newData = await Api.get("?page=" + ++page);
-      newData = newData.blogs;
-    } else {
-      // 否则，使用带有搜索文本的 api.get 请求数据
-      newData = await Api.get("search/" + props.searchText + "?page=" + ++page);
-      newData = newData.blogs;
+  const handleAddData = async () => {
+    async function fetchData() {
+      try{
+        const response = await Api.get(localStorage.getItem('url') + "?page=" + ++page);
+        props.onAddData(response.blogs);
+      }catch(e){
+        console.log(e);
+        Toast.error(e.message)
+      }
     }
-    props.onAddData(newData);
+    fetchData();
   };
 
   const handleScroll = () => {
@@ -28,9 +26,10 @@ function ScrollDetector(props) {
 
     if (scrollPosition >= pageHeight - windowHeight) {
       console.log("You have reached the bottom of the page");
-      console.log(props.searchText);
-      console.log(props.searchText === "");
-      handleAddData(props.searchText === "");
+      console.log(location.pathname);
+      if (location.pathname == '/body' || location.pathname == '/body/')    
+        handleAddData();
+
     }
   };
 

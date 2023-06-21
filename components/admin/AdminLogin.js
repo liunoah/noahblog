@@ -26,7 +26,7 @@ const Login = () => {
       console.log(response);
       localStorage.setItem("isAdmin", true)
       Toast.success('Login success');
-      history('/');
+      history('/body');
     } catch (error) {
       localStorage.setItem("isAdmin", false)
       console.error(error);

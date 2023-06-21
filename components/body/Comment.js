@@ -124,6 +124,7 @@ function List(props) {
                   </li>
                 ))}
               </ul>
+              
               <div style={styles.comment_div}>
                 <textarea onSubmit={handleSubmit} value={comment} style={styles.input} onChange={(event) => setComment(event.target.value)} placeholder="评论千万条,友善第一条" />
                 <button className='comment_button' onClick={handleSubmit} >提交</button>
@@ -142,7 +143,7 @@ const styles = {
     borderRadius: '10px',
     marginLeft: '15px',
     
-    width: getBrowserInfo() ? "29%" : "740px",
+    width: getBrowserInfo() ? "100%" : "740px",
     height: '50px',
     maxWidth: '700px',
     lineHeight: "20px",

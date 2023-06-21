@@ -28,15 +28,6 @@ import { ToastContainer, toast } from 'react-toastify';
     }
   };
 
-    
-  useEffect(() => {
-    async function fetchData() {
-      const response = await api.get('');
-      setDataList(response.blogs);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, []);
 
   useEffect(() => {
     console.log('DataList has been updated:', dataList);
@@ -46,7 +37,7 @@ import { ToastContainer, toast } from 'react-toastify';
     <SafeAreaView style={styles.container}>
       <ToastContainer  />
       <Head onAddData={addDataToList} setDataList={setDataList} />
-      {isLoading ? (
+      {dataList == [] ? (
         <Loading />
       ) : (
         <ListDisplay dataList={dataList} removeElement={removeElement} />

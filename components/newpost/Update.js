@@ -7,12 +7,14 @@ import Api from '/components/tools/Api';
 import modules from './modules';
 import generatePoem from '../tools/Poem';
 import Head from '../head/head'
+import { set } from 'lodash';
+import { StyleSheet, Text } from 'react-native';
 
 const Update = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const { articleId } = useParams();
-
+  const [hide, setHide] = useState(false);
 
   const history = useNavigate();
 
@@ -22,12 +24,14 @@ const Update = () => {
       console.log(response);
       setTitle(response.title)
       setText(response.text)
+      setHide(response.hide)
     }
     function getLocalData(){
       const savedDataString = localStorage.getItem('updateData' + articleId);
       const savedData = savedDataString ? JSON.parse(savedDataString) : {};
       setTitle(savedData.title || '');
       setText(savedData.text || '');
+      setHide(savedData.hide || false);
     }
     console.log();
     if (localStorage.getItem('updateData' + articleId)) {
@@ -41,12 +45,13 @@ const Update = () => {
     const data = {
       title,
       text,
+      hide,
     };
     localStorage.setItem('updateData' + articleId, JSON.stringify(data));
     console.log(localStorage.getItem('updateData' + articleId, JSON.stringify(data)));
     console.log("存储成功");
     
-  }, [title, text]);
+  }, [title, text, hide]);
 
   const handlePublish = async () => {
     // do something with the title and text data, such as publishing to a blog
@@ -55,6 +60,9 @@ const Update = () => {
     const body = {
       title: title,
       text: text,
+      name: localStorage.getItem('nickname'),
+      ip : "1.1.1.1",
+      hide : hide
     };
     if (title == "") {
       body.title = generatePoem()
@@ -63,7 +71,7 @@ const Update = () => {
     const res = await Api.put("" + articleId, body)
     console.log(res);
     alert("update success")
-    history('/')
+    history('/body')
 
   };
   const handleClear = async () => {
@@ -73,7 +81,9 @@ const Update = () => {
     localStorage.removeItem('updateData' + articleId)
 
   };
-
+  const handelHide = () => {
+    setHide(!hide)
+  }
   //看门狗,没有写...
   return (
     <EditorContainer>
@@ -86,6 +96,8 @@ const Update = () => {
       <Editor modules={modules.modules} formats={modules.formats} value={text} onChange={(value) => setText(value)} />
       <PublishButtonsContainer>
         <ButtonWrapper>
+        <Text style={styles.hideText}>是否隐藏</Text>
+        <input checked={hide} onChange={handelHide} style={styles.hide}   type="checkbox"></input>
           <Link to="/"><PublishButton >返回主页</PublishButton></Link>
           <Link><PublishButton onClick={handlePublish} >更新</PublishButton></Link>
           {/* <PublishButton onClick={handleClear}>clear</PublishButton> */}
@@ -96,4 +108,17 @@ const Update = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  hide: {
+    marginRight: "65%",
+    width: 23,
+    height: 23,
+    borderRadius: 24,
+    borderColor: 'rgb(235, 236, 240)',
+    borderWidth: 1,
+  },
+  hideText: {
+    fontSize: 18,
+  }
+});
 export default Update;

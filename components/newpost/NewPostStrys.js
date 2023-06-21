@@ -28,6 +28,7 @@ export const Editor = styled(ReactQuill)`
 
   .ql-editor {
     min-height: 300px;
+    font-size: 18px
   }
   // 将操作栏固定在顶部
   .ql-container {
