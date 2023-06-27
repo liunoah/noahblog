@@ -8,6 +8,7 @@ import { alignCenter } from 'fontawesome';
 import { AntDesign } from '@expo/vector-icons';
 import RandomNickname from '../tools/RandomNickname';
 import Toast from '../tools/Toast';
+
 export default function Header(props) {
   const [searchText, setSearchText] = useState("")
   const [nickname, setNickname] = useState("")
@@ -78,12 +79,13 @@ export default function Header(props) {
   }
   return (
     <View style={styles.outerContainer}>
+      
       <ScrollDetector onAddData={props.onAddData}  searchText={searchText} />
       <View style={styles.container}>
         <View style={styles.header}>
           <Link title='liunoah' to="/body">
             <TouchableOpacity>
-              <Image style={styles.img} source={require('../../assets/favicon.png')} />
+              <Image style={[styles.img]} source={require('../../assets/favicon.png')} />
             </TouchableOpacity>
           </Link>
           <TouchableOpacity style={styles.button}>

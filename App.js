@@ -36,6 +36,7 @@ const App = () => {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/detail/:articleId" element={<ArticleDetail />} />
+      
         {
           isMobile ? <Route path="/" element={<H5Body />} /> : <Route path="/" element={<SplashScreen />} />
         }

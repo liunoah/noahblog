@@ -1,18 +1,28 @@
 pre {
-  background-color: #000;
-  color: #fff;
-  padding: 1em;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.6;
   overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+  font-family: 'Courier New', Courier, monospace;
+  color: #333;
+  content: "复制代码";
 }
 
+pre {
+  position: relative;
+  padding-left: 30px; /* 为icon留出空间 */
+}
 code {
   font-family: 'Courier New', Courier, monospace;
 }
-
 .language-javascript {
   color: #f8dc3d;
 }
-
 .language-css {
   color: #6ca0dc;
 }
@@ -52,3 +62,23 @@ code {
 .hljs-code {
   overflow-x: auto;
 }
+pre:hover::after {
+  content: "Copy"; /* 鼠标悬浮时显示的文本 */
+  position: absolute;
+  top: 0;
+  right: 0; /* 文本距离icon的距离 */
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  /* opacity: 0; 默认不透明 */
+  transition: all 0.2s ease-in-out;
+}
+pre:hover{
+  border: #333;
+}
+/* *:hover{
+  border: #333;
+} */
+

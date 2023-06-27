@@ -5,7 +5,7 @@ import Head from '../head/head'
 import api from '/components/tools/Api';
 import Loading from '../tools/loading';
 import { ToastContainer, toast } from 'react-toastify';
-
+import CopyBody from '../tools/markdown/CopyBody';
 
 // import 'react-toastify/dist/ReactToastify.css';
  function MainBody() {
@@ -27,7 +27,9 @@ import { ToastContainer, toast } from 'react-toastify';
       setIsLoadingOnButtom(true);
     }
   };
-
+  useEffect(() => {
+    CopyBody()
+  }, []);
 
   useEffect(() => {
     console.log('DataList has been updated:', dataList);
